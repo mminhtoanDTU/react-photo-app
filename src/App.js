@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from "react-router-dom";
+import { Result, Button } from 'antd'
+import { Header, Loading } from './components';
+
+const Photos = React.lazy(() => import('./features/Photos'))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<Loading />}>
+      <Router>
+        <Header />
+        <Switch>
+          <Redirect exact from="/" to="/photos" />
+          <Route path="/photos" component={Photos} />
+          <Route path="/login">
+            <Result
+              title="Cooming soon!"
+              extra={
+                <Button type="primary" key="console">
+                  <Link to="/">
+                    Go Home
+                  </Link>
+                </Button>
+              }
+            />
+          </Route>
+
+        </Switch>
+      </Router>
+    </Suspense>
   );
 }
 
