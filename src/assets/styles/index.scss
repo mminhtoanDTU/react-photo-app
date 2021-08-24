@@ -27,7 +27,6 @@ a {
 }
 
 img {
-    display: block;
     max-width: 100%;
     object-fit: cover;
 }
@@ -60,4 +59,12 @@ h6 {
 
 .content {
     padding: 20px 0;
+
+    &.form-edit {
+        max-width: 400px;
+    }
+
+    @media screen and (max-width: 430px) {
+        padding: 20px;
+    }
 }
