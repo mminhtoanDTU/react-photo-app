@@ -1,9 +1,9 @@
 import React from 'react';
-
+import './loading.scss'
 function Loading(props) {
     return (
-        <div>
-            <h3>Loading...</h3>
+        <div className="loading-wrapper">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     );
 }

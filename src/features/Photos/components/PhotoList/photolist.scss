@@ -1,0 +1,26 @@
+.section-gallery {}
+
+.gallery-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.gallery-btn {
+    display: block;
+    height: 40px;
+}
+
+.gallery-link {
+    font-size: 15px;
+}
+
+.gallery-title {
+    color: var(--first-color);
+    font-size: 1.5rem;
+}
+
+.gallery-grid {
+    text-align: center;
+}

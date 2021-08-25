@@ -21,6 +21,7 @@ function RandomPhotoField(props) {
     const { name } = field;
     const [currentUrl, setCurretUrl] = useState('');
     const [querySearch, setQuerySearch] = useState('');
+    const [isRandom, setIsRandom] = useState(false);
 
     useEffect(() => {
         handleRandomClick();
@@ -28,11 +29,13 @@ function RandomPhotoField(props) {
 
     const handleRandomClick = () => {
         const url = `https://source.unsplash.com/featured/?${querySearch}`;
+        setIsRandom(true);
         const fetchImage = async () => {
             const response = await fetch(url);
             const data = await response.clone();
             setCurretUrl(data.url);
             form.setFieldValue(name, data.url);
+            setIsRandom(false);
         }
         fetchImage();
     }
@@ -44,7 +47,7 @@ function RandomPhotoField(props) {
         >
             <div className="photo-field">
                 <Input
-                    addonBefore="Search"
+                    addonBefore="Key"
                     name={name}
                     placeholder="Eg: cat,dog"
                     size="large"
@@ -53,6 +56,7 @@ function RandomPhotoField(props) {
                     onChange={e => setQuerySearch(e.target.value)}
                 />
                 <Button
+                    loading={isRandom}
                     size="large"
                     onClick={handleRandomClick}
                 >

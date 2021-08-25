@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,10 +8,20 @@ import {
 } from "react-router-dom";
 import { Result, Button } from 'antd'
 import { Header, Loading } from './components';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Photos = React.lazy(() => import('./features/Photos'))
 
 function App() {
+
+  useEffect(() => {
+    window.document.title = `Awesome Photos`;
+    AOS.init({
+      duration: 600
+    });
+  }, [])
+
   return (
     <Suspense fallback={<Loading />}>
       <Router>
