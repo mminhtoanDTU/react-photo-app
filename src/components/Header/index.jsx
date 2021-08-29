@@ -12,16 +12,11 @@ function Header(props) {
         <header className="wrapper">
             <div className="header container">
                 <NavLink to="/">
-                    <h1 className="header__logo">Minh Toan</h1>
+                    <h1 className="header__logo">Photo Diary</h1>
                 </NavLink>
-                <ul className="header__navbar">
-                    <li className="header__navbar-item">
-                        <NavLink to="/photos">Photos</NavLink>
-                    </li>
-                    <li className="header__navbar-item primary">
-                        <NavLink to="/login">Login</NavLink>
-                    </li>
-                </ul>
+                <span className="header__username">
+                    Welcome!
+                </span>
             </div>
         </header>
     );

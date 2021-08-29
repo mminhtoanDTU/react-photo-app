@@ -17,15 +17,19 @@ RandomPhotoField.defaultProps = {
 }
 
 function RandomPhotoField(props) {
-    const { field, form, label } = props;
-    const { name } = field;
+    const { field, form, label, isAddMode } = props;
+    const { name, value } = field;
     const [currentUrl, setCurretUrl] = useState('');
     const [querySearch, setQuerySearch] = useState('');
     const [isRandom, setIsRandom] = useState(false);
 
     useEffect(() => {
-        handleRandomClick();
-    }, [])
+        if (isAddMode) {
+            handleRandomClick();
+        } else {
+            return;
+        }
+    }, []);
 
     const handleRandomClick = () => {
         const url = `https://source.unsplash.com/featured/?${querySearch}`;
@@ -45,10 +49,17 @@ function RandomPhotoField(props) {
             name={name}
             label={label}
         >
+            <div className="photo-wrapper">
+                <Image
+                    src={isAddMode ? currentUrl : value}
+                    height={400}
+                    width={"100%"}
+                    alt="Awesome photo."
+                />
+            </div>
             <div className="photo-field">
                 <Input
                     addonBefore="Key"
-                    name={name}
                     placeholder="Eg: cat,dog"
                     size="large"
                     allowClear
@@ -59,18 +70,12 @@ function RandomPhotoField(props) {
                     loading={isRandom}
                     size="large"
                     onClick={handleRandomClick}
+                    type="primary"
                 >
                     Random
                 </Button>
             </div>
-            <div className="photo-wrapper">
-                <Image
-                    src={currentUrl}
-                    height={400}
-                    width={"100%"}
-                    alt="Awesome photo."
-                />
-            </div>
+
         </FormItem>
     );
 }

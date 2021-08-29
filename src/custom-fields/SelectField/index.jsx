@@ -1,8 +1,7 @@
+import { FormItem, Select } from 'formik-antd';
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Form, FormItem, Input, Mentions, Select, SubmitButton } from 'formik-antd'
-
 import './selectfield.scss';
+
 
 SelectField.propTypes = {
 

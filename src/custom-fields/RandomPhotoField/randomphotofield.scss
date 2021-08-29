@@ -1,7 +1,6 @@
 .photo-field {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
 
     & button {
         margin-left: 15px;
@@ -12,6 +11,7 @@
     min-height: 400px;
     background-color: #fefefe;
     border-radius: 5px;
+    margin-bottom: 5px;
 
     img {
         border-radius: 5px;

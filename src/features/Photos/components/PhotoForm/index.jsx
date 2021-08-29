@@ -13,12 +13,8 @@ PhotoForm.propTypes = {
 };
 
 function PhotoForm(props) {
-    const { onSubmited } = props;
-    const initalValues = {
-        title: '',
-        categoryId: null,
-        photoUrl: ''
-    };
+    const { onSubmited, initalValues, isAddMode } = props;
+
     const photoSchema = Yup.object().shape({
         title: Yup.string().required("This field is required!"),
         categoryId: Yup.number().required('This field is required!').nullable(),
@@ -38,6 +34,12 @@ function PhotoForm(props) {
                         autoComplete="off"
                         layout="vertical"
                     >
+                        <FastField
+                            name="photoUrl"
+                            label="Photo"
+                            component={RandomPhotoField}
+                            isAddMode={isAddMode}
+                        />
                         <InputField
                             label="Title"
                             name="title"
@@ -50,11 +52,7 @@ function PhotoForm(props) {
                             placeholder="what is category"
                             options={PHOTO_CATEGORY_OPTIONS}
                         />
-                        <FastField
-                            name="photoUrl"
-                            label="Photo"
-                            component={RandomPhotoField}
-                        />
+
 
                         <SubmitButton
                             disabled={false}
@@ -63,7 +61,7 @@ function PhotoForm(props) {
                             htmlType="submit"
                             block
                         >
-                            Add to gallery
+                            {isAddMode ? "Add to gallery" : "Update your photo"}
                         </SubmitButton>
                     </Form>
                 )

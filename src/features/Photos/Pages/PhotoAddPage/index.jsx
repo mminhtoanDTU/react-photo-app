@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 import { Banner } from 'components';
 import { PhotoForm } from 'features/Photos/components';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addPhoto } from 'features/Photos/photoSlide';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPhoto, updatePhoto } from 'features/Photos/photoSlide';
 import randomId from 'logic/randomId'
 import { Loading } from 'components';
+import { message } from 'antd';
 
 
 PhotoAddPage.propTypes = {
@@ -17,36 +18,58 @@ PhotoAddPage.propTypes = {
 
 function PhotoAddPage(props) {
     const [isLoading, setIsLoading] = useState(false);
+    const photos = useSelector(state => state.photos);
     const dispatch = useDispatch();
     const history = useHistory();
+    const { photoId } = useParams();
 
+    const isAddMode = !photoId;
+    const editedPhoto = photos.find(photo => photo.id === photoId);
+
+    const initalValues = isAddMode ? {
+        title: '',
+        categoryId: null,
+        photoUrl: ''
+    } : editedPhoto;
+
+    //Scroll top first
     useState(() => {
         setIsLoading(true);
+        window.scrollTo(0, 0);
         setTimeout(() => {
             setIsLoading(false);
         }, 1000)
     }, []);
 
     const handleFormSubmit = (values) => {
-        setIsLoading(true)
+        message.loading({ content: `${isAddMode ? 'Adding...' : 'Updating...'}`, key: 'addedit' });
         setTimeout(() => {
-            const newPhoto = {
-                ...values,
-                id: randomId({ prefix: 'photo' })
+            if (isAddMode) {
+                const newPhoto = {
+                    ...values,
+                    id: randomId({ prefix: 'photo' })
+                }
+                const action = addPhoto(newPhoto);
+                dispatch(action);
+            } else {
+                const action = updatePhoto(values);
+                dispatch(action);
             }
-            const action = addPhoto(newPhoto);
-            dispatch(action);
 
             history.push('/photos');
-            setIsLoading(false);
+            message.success({ content: 'Done!', key: 'addedit', duration: 1 });
         }, 2000)
     }
 
     return (
         <>
-            <Banner title="Add a awesome photo 😎" />
+            <Banner title={isAddMode ? "Add a awesome photo 😎" : "Edit your photo 😚"} />
             <div className="content form-edit container">
-                <PhotoForm onSubmited={handleFormSubmit} />
+                <PhotoForm
+                    isAddMode={isAddMode}
+                    initalValues={initalValues}
+                    onSubmited={handleFormSubmit}
+                />
             </div>
             {isLoading && <Loading />}
         </>

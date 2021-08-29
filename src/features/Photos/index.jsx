@@ -14,7 +14,7 @@ function Photos(props) {
             <Switch>
                 <Route exact path={match.url} component={PhotoPage} />
                 <Route path={`${match.url}/add`} component={PhotoAddPage} />
-                <Route path={`${match.url}/edit/:slug`} component={PhotoAddPage} />
+                <Route path={`${match.url}/edit/:photoId`} component={PhotoAddPage} />
 
                 <Route component={NotFound} />
             </Switch>

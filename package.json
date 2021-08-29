@@ -11,16 +11,17 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.12",
     "aos": "^2.3.4",
+    "axios": "^0.21.1",
     "craco-less": "^1.18.0",
     "formik": "^2.2.9",
     "formik-antd": "^2.0.1",
+    "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-favicon": "^0.0.23",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-select": "^4.3.1",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
@@ -28,7 +29,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "sh ./deploy-surge.sh"
   },
   "eslintConfig": {
     "extends": [

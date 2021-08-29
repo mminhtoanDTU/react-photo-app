@@ -10,7 +10,7 @@ PhotoCard.propTypes = {
 };
 
 function PhotoCard(props) {
-    const { data, handleRemovePhoto, handleEditPhoto } = props;
+    const { data, handleRemovePhoto, handleEditPhoto, handleDownloadPhoto } = props;
     const { id, title, photoUrl } = data;
 
     const [isPopOpen, setIsPopOpen] = useState(false);
@@ -49,7 +49,7 @@ function PhotoCard(props) {
                 </div>
                 {isPopOpen &&
                     <div className="popover">
-                        <a href={photoUrl} download target="_blank">
+                        <a onClick={() => handleDownloadPhoto(photoUrl, title)}>
                             <DownloadOutlined />
                             Download
                         </a>
