@@ -1,4 +1,5 @@
 {
+  "homepage": "https://mminhtoanDTU.github.io/react-photo-app",
   "name": "react-app-photo",
   "version": "0.1.0",
   "private": true,
@@ -30,7 +31,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "deploy": "sh ./deploy-surge.sh"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.2.3",
     "node-sass": "^5.0.0"
   }
 }

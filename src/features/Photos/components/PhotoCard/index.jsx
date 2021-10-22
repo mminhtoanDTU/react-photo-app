@@ -14,18 +14,28 @@ function PhotoCard(props) {
     const { id, title, photoUrl } = data;
 
     const [isPopOpen, setIsPopOpen] = useState(false);
-    const popOverRef = useRef(null);
+    const btnMoreFunc = useRef(null);
 
     useEffect(() => {
-        document.addEventListener('click', (e) => {
-            if (e.target.parentElement !== popOverRef.current) {
-                setIsPopOpen(false)
-            }
-        })
-    })
+        if (isPopOpen) {
+            document.addEventListener('click', handleClickOutside);
+        } else {
+            document.removeEventListener('click', handleClickOutside);
+        }
+
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [isPopOpen])
+
+    const handleClickOutside = (e) => {
+        if (btnMoreFunc.current.contains(e.target)) {
+            return;
+        }
+
+        setIsPopOpen(false);
+    }
 
     const handleIsPopOpen = () => {
-        setIsPopOpen(!isPopOpen);
+        setIsPopOpen(pre => !pre);
     }
 
 
@@ -44,8 +54,9 @@ function PhotoCard(props) {
                 <div
                     className="photo-card__meta-item func"
                     onClick={handleIsPopOpen}
+                    ref={btnMoreFunc}
                 >
-                    <EllipsisOutlined ref={popOverRef} />
+                    <EllipsisOutlined />
                 </div>
                 {isPopOpen &&
                     <div className="popover">

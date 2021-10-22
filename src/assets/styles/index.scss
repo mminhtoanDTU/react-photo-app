@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 :root {
     --first-color: #7FC8A9;
     --second-color: #D5EEBB;
@@ -11,14 +13,7 @@ html {
 }
 
 body {
-    font-family: 'Roboto',
-        'Oxygen',
-        'Ubuntu',
-        'Cantarell',
-        'Fira Sans',
-        'Droid Sans',
-        'Helvetica Neue',
-        sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 
